@@ -10,5 +10,5 @@
 /captures
 .externalNativeBuild
 .idea/*
-
+*repro_sdk_token.xml
 
