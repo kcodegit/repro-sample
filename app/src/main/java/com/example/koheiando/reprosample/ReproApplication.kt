@@ -43,22 +43,10 @@ class ReproApplication : Application() {
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 when (eventType) {
                     XmlPullParser.START_TAG -> {
-                        Log.d(
-                            "ReproApplication",
-                            "reproToken name ${parser.name}, name attr ${parser.getAttributeValue(
-                                null,
-                                "name"
-                            )}, text ${parser.text}"
-                        )
+                        Log.d("ReproApplication", "reproToken name ${parser.name}, name attr ${parser.getAttributeValue(null, "name")}, text ${parser.text}")
                         if (parser.getAttributeValue(null, "name") == REPRO_TOKEN_KEY) {
                             if (parser.next() == XmlPullParser.TEXT) {
-                                Log.d(
-                                    "ReproApplication",
-                                    "reproToken name ${parser.name}, name attr ${parser.getAttributeValue(
-                                        null,
-                                        "name"
-                                    )}, text ${parser.text}"
-                                )
+                                Log.d("ReproApplication", "reproToken name ${parser.name}, name attr ${parser.getAttributeValue(null, "name")}, text ${parser.text}")
                                 return parser.text
                             }
                         }
