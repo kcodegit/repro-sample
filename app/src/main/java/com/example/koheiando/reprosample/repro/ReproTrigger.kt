@@ -1,4 +1,4 @@
-package com.example.koheiando.reprosample
+package com.example.koheiando.reprosample.repro
 import io.repro.android.Repro
 
 class ReproTrigger {
@@ -6,7 +6,8 @@ class ReproTrigger {
         private var instance: ReproTrigger? = null
         fun getInstance(): ReproTrigger {
             if (instance == null)
-                instance = ReproTrigger()
+                instance =
+                        ReproTrigger()
             return instance!!
         }
     }
@@ -14,14 +15,14 @@ class ReproTrigger {
     // initialize the closure
     var send = send()
 
-    private fun send(): (span: Int, probability: Int) -> Unit {
+    private fun send(): (span: Int, probability: Int, event: ReproEvent?) -> Unit {
         var cntSinceLastTrigger = 0
-        return { span, probability ->
+        return { span, probability, event ->
             cntSinceLastTrigger++
             val percent = if (probability > 100) 100 else if (probability < 0) 0 else probability
             if (cntSinceLastTrigger != 0 && cntSinceLastTrigger % span == 0) {
                 if ((1..100).shuffled().last() <= percent) {
-                    Repro.track(randomEvent().raw)
+                    Repro.track(event?.raw ?:randomEvent().raw)
                     cntSinceLastTrigger = 0
                 }
             }
